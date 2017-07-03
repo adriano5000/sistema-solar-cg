@@ -60,6 +60,7 @@ int main(int argc, char* argv[])
     float rotz = 105;
     if(argc != 5)
     {
+        std::cout << "args: <res_x> <res_y> <vsync> <fov>\n";
         res_x = 1280;
         res_y = 720;
         vsync = 1;
@@ -90,7 +91,6 @@ int main(int argc, char* argv[])
     Texture jupiter("./jupiter.jpg");
     Texture space("./space.jpg");
     transform trans(glm::vec3(), glm::vec3(), glm::vec3(1.0f, 1.0f, 1.0f));
-    std::cout << "Current fov: " << glm::radians(fov) << std::endl;
     float camera_x = 0;
     float camera_y = 0;
     float camera_z = -300;
@@ -160,6 +160,7 @@ int main(int argc, char* argv[])
         float e_y = trans.GetPosition().y;
         float e_x = trans.GetPosition().x;
         trans.GetRotation() = glm::vec3(0, 0, 0);
+        trans.GetRotation().y = 25 * counter;
         s.Bind();
         s.Update(trans, c);
         earth.Bind(0);
