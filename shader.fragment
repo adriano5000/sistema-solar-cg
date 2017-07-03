@@ -18,9 +18,7 @@ void main(void)
 	float d = length(lightToSurface);
 	vec3 normalizedLightDirection = lightToSurface / d;
 	d /= LightRange;
-//	float attenuation = 1 / (d * d * LightAttenuation.x + d * LightAttenuation.y + LightAttenuation.z);
 	float angle = -dot(normalizedLightDirection, normalize(LightDirection));
-//	attenuation = clamp(attenuation, 0, 1);
 	float ndotl = clamp(dot(normalizedLightDirection, normalize(normal0)), 0, 1);
 	vec4 lightValue = LightColor * ndotl ;// attenuation;
 	lightValue = clamp(lightValue + ambientLight, 0, 1);
