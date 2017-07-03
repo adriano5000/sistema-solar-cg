@@ -1,0 +1,10 @@
+cmake_minimum_required(VERSION 2.8)
+
+project(opengl-cmake)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3")
+add_executable(${PROJECT_NAME} "main.cpp" "shader.cpp" "window.cpp" "texture.cpp" "mesh.cpp" "stb_image.c" "obj_loader.cpp")
+if(WIN32)
+    target_link_libraries(${PROJECT_NAME} opengl32 glew32 glfw3)
+else()
+    target_link_libraries(${PROJECT_NAME} GL GLEW glfw)
+endif()
