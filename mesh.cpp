@@ -1,7 +1,7 @@
 #include "mesh.h"
 #include <vector>
 
-void mesh::init_mesh(const IndexedModel& model)
+void Mesh::init_mesh(const IndexedModel& model)
 {
     draw_count = model.indices.size();
     glGenVertexArrays(1, &vao);
@@ -30,29 +30,34 @@ void mesh::init_mesh(const IndexedModel& model)
     glBindVertexArray(0);
 }
 
-mesh::mesh(const std::string& file_name) { init_mesh(OBJModel(file_name).ToIndexedModel()); }
+Mesh::Mesh(const std::string& file_name) { init_mesh(OBJModel(file_name).ToIndexedModel()); }
 
-mesh::mesh(vertex* vertices, size_t vertices_size, unsigned int* indices, unsigned int indices_size)
+Mesh::Mesh(vertex* vertices, size_t vertices_size, unsigned int* indices, unsigned int indices_size)
 {
     IndexedModel model;
+    model.positions.reserve(vertices_size);
+    model.texCoords.reserve(vertices_size);
+    model.normals.reserve(vertices_size);
+    model.indices.reserve(indices_size);
     for(size_t i = 0; i < vertices_size; i++)
     {
         model.positions.push_back(vertices[i].pos);
         model.texCoords.push_back(vertices[i].tex);
         model.normals.push_back(vertices[i].nor);
     }
+
     for(size_t i = 0; i < indices_size; i++)
         model.indices.push_back(indices[i]);
     init_mesh(model);
 }
 
-mesh::~mesh()
+Mesh::~Mesh()
 {
     glDeleteBuffers(4, &vao);
     glDeleteVertexArrays(1, &vao);
 }
 
-void mesh::Draw()
+void Mesh::Draw()
 {
     glBindVertexArray(vao);
     glDrawElementsBaseVertex(GL_TRIANGLES, draw_count, GL_UNSIGNED_INT, 0, 0);

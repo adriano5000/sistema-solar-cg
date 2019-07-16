@@ -6,13 +6,13 @@
 #include <iostream>
 #include <string>
 
-class shader
+class Shader
 {
 public:
-    shader(const std::string& shader_file);
-    ~shader();
+    Shader(const std::string& shader_file);
+    ~Shader();
     void Bind();
-    void Update(const transform& trans, const Camera& cam);
+    void Update(const Transform& trans, const Camera& cam);
 
 private:
     static const unsigned int SHADER_LIST_SIZE = 2;

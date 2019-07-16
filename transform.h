@@ -5,10 +5,10 @@
 #include <glm/gtx/transform.hpp>
 #include "camera.h"
 
-class transform
+class Transform
 {
 public:
-    transform(const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& scale)
+    Transform(const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& scale)
     {
         _position = position;
         _rotation = rotation;

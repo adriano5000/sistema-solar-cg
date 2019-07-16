@@ -7,6 +7,7 @@
 #include "texture.h"
 #include "transform.h"
 #include "window.h"
+#include "planet.h"
 
 float lastX;
 float lastY;
@@ -56,8 +57,6 @@ int main(int argc, char* argv[])
     int res_y;
     int vsync;
     float fov;
-    float rotx = 105;
-    float rotz = 105;
     if(argc != 5)
     {
         std::cout << "args: <res_x> <res_y> <vsync> <fov>\n";
@@ -83,28 +82,31 @@ int main(int argc, char* argv[])
 
     window w(res_x, res_y, "OpenGL", vsync);
 
-    shader s("./shader");
-    shader s2("./shader2");
+    Shader s("./shader");
+    Shader s2("./shader2");
     Texture earth("./earth.jpg");
     Texture moon("./moon.jpg");
     Texture sun("./sun.jpg");
     Texture jupiter("./jupiter.jpg");
+    Texture jupiter2("./jupiter.jpg");
     Texture space("./space.jpg");
-    transform trans(glm::vec3(), glm::vec3(), glm::vec3(1.0f, 1.0f, 1.0f));
+    Transform trans(glm::vec3(), glm::vec3(), glm::vec3(1.0f, 1.0f, 1.0f));
     float camera_x = 0;
     float camera_y = 0;
     float camera_z = -300;
     c = Camera(glm::vec3(camera_x, camera_y, camera_z), glm::radians(fov), (float)(res_x) / (float)(res_y), 0.01f, 4000.0f);
-    mesh ball("ball4.obj");
+    Mesh ball("ball4.obj");
 
     glfwSetInputMode(w.GetWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     glfwSetCursorPosCallback(w.GetWindow(), &mouse_callback);
 
-    mesh cube("cube.obj");
+    Mesh cube("cube.obj");
     double counter = 0.0;
 
     auto start = std::chrono::steady_clock::now();
     auto end = std::chrono::steady_clock::now();
+
+    Planet jup(&s, &jupiter2, &ball, glm::vec3(0, 0, 0), glm::vec3(30, 30, 30), glm::vec3(490, 420, 120), 3.0);
 
     while(!glfwWindowShouldClose(w.GetWindow()))
     {
@@ -140,6 +142,9 @@ int main(int argc, char* argv[])
         glEnable(GL_DEPTH_TEST);
         glEnable(GL_CULL_FACE);
         glEnable(GL_BACK);
+
+        jup.Update(counter, c);
+
 
         trans.GetPosition().z = (0 + 490 * cosf(3 * counter));
         trans.GetPosition().x = (0 + 420 * sinf(3 * counter));

@@ -21,12 +21,12 @@ enum VertexBufferData
     BUFFER_SIZE
 };
 
-class mesh
+class Mesh
 {
 public:
-    mesh(const std::string& file_name);
-    mesh(vertex* vertices, size_t vertices_size, unsigned int* indices, unsigned int indices_size);
-    ~mesh();
+    Mesh(const std::string& file_name);
+    Mesh(vertex* vertices, size_t vertices_size, unsigned int* indices, unsigned int indices_size);
+    ~Mesh();
     void Draw();
 
 private:

@@ -57,12 +57,14 @@ static std::string LoadShader(const std::string& shader_file)
         std::cerr << "Unable to load shader: " << shader_file << std::endl;
     return out;
 }
-void shader::Update(const transform& trans, const Camera& cam)
+
+void Shader::Update(const Transform& trans, const Camera& cam)
 {
     glUniformMatrix4fv(_uniforms[TRANSFORM], 1, GL_FALSE, &trans.GetModel()[0][0]);
     glUniformMatrix4fv(_uniforms[CAMERA], 1, GL_FALSE, &cam.GetViewProjection()[0][0]);
 }
-shader::shader(const std::string& shader_file)
+
+Shader::Shader(const std::string& shader_file)
 {
     _shader_program = glCreateProgram();
     _shader_list[0] = CreateShader(LoadShader(shader_file + ".vertex"), GL_VERTEX_SHADER);
@@ -81,9 +83,9 @@ shader::shader(const std::string& shader_file)
     _uniforms[CAMERA] = glGetUniformLocation(_shader_program, "camera");
 }
 
-void shader::Bind() { glUseProgram(_shader_program); }
+void Shader::Bind() { glUseProgram(_shader_program); }
 
-shader::~shader()
+Shader::~Shader()
 {
     for(size_t i = 0; i < SHADER_LIST_SIZE; i++)
     {
