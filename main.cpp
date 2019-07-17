@@ -100,13 +100,12 @@ int main(int argc, char* argv[])
     glfwSetInputMode(w.GetWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     glfwSetCursorPosCallback(w.GetWindow(), &mouse_callback);
 
-    Mesh cube("cube.obj");
     double counter = 0.0;
 
     auto start = std::chrono::steady_clock::now();
     auto end = std::chrono::steady_clock::now();
 
-    Planet jup(&s, &jupiter2, &ball, glm::vec3(0, 0, 0), glm::vec3(30, 30, 30), glm::vec3(490, 420, 120), 3.0);
+    Planet jup(&s, &jupiter2, &ball, glm::vec3(0, 0, 120), glm::vec3(30, 30, 30), glm::vec3(490, 420, 0), 3.0);
 
     while(!glfwWindowShouldClose(w.GetWindow()))
     {
@@ -144,18 +143,6 @@ int main(int argc, char* argv[])
         glEnable(GL_BACK);
 
         jup.Update(counter, c);
-
-
-        trans.GetPosition().z = (0 + 490 * cosf(3 * counter));
-        trans.GetPosition().x = (0 + 420 * sinf(3 * counter));
-        trans.GetPosition().y = 120 * cosf(3 * counter);
-        trans.GetScale() = glm::vec3(30, 30, 30);
-        trans.GetRotation() = glm::vec3(0, 0, 0);
-        trans.GetRotation().y = 3 * counter;
-        s.Bind();
-        s.Update(trans, c);
-        jupiter.Bind(0);
-        ball.Draw();
 
         trans.GetPosition().z = (0 + 150 * cosf(5 * counter));
         trans.GetPosition().x = (0 + 150 * sinf(5 * counter));

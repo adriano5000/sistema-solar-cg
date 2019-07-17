@@ -10,17 +10,14 @@
 class Planet
 {
 private:
-    Transform _trans;
-
-    glm::vec3 _center;
-    glm::vec3 _scale;
-    glm::vec3 _speed;
-
-    double _rot_speed;
-
     Shader* _shader;   // do not delete
     Texture* _texture; // do no delete
     Mesh* _mesh;
+    glm::vec3 _scale;
+    glm::vec3 _speed;
+    glm::vec3 _center;
+    double _rot_speed;
+    Transform _trans;
 
 public:
     Planet(Shader* shader, Texture* texture, Mesh* mesh, const glm::vec3& center, const glm::vec3& scale, const glm::vec3& speed, double rot_speed);
