@@ -1,7 +1,7 @@
 #include "window.h"
 #include <iostream>
 
-window::window(size_t width, size_t height, const char* title, int vsync)
+Window::Window(size_t width, size_t height, const char* title, int vsync)
 {
     if(!glfwInit())
         std::cerr << "error on glfwInit()";
@@ -33,9 +33,9 @@ window::window(size_t width, size_t height, const char* title, int vsync)
     glEnable(GL_LIGHTING);
 }
 
-window::~window() { glfwTerminate(); }
+Window::~Window() { glfwTerminate(); }
 
-void window::Update()
+void Window::Update()
 {
     glfwSwapBuffers(_window);
     glfwPollEvents();

@@ -80,7 +80,7 @@ int main(int argc, char* argv[])
     lastY = res_y / 2;
     firstMouse = false;
 
-    window w(res_x, res_y, "OpenGL", vsync);
+    Window w(res_x, res_y, "OpenGL", vsync);
 
     Shader s("./shader");
     Shader s2("./shader2");
