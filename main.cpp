@@ -16,9 +16,9 @@ float yaw;
 float pitch;
 Camera c;
 
-void mouse_callback(GLFWwindow* window, double xpos, double ypos);
+void mouse_callback(GLFWwindow*, double xpos, double ypos);
 
-void mouse_callback(GLFWwindow* window, double xpos, double ypos)
+void mouse_callback(GLFWwindow*, double xpos, double ypos)
 {
     if(firstMouse)
     {
@@ -95,7 +95,7 @@ int main(int argc, char* argv[])
     float camera_y = 0;
     float camera_z = -300;
     c = Camera(glm::vec3(camera_x, camera_y, camera_z), glm::radians(fov), (float)(res_x) / (float)(res_y), 0.01f, 4000.0f);
-    Mesh ball("ball4.obj");
+    Mesh ball("ball.obj");
 
     glfwSetInputMode(w.GetWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     glfwSetCursorPosCallback(w.GetWindow(), &mouse_callback);

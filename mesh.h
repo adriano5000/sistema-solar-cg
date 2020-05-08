@@ -18,6 +18,7 @@ enum VertexBufferData
     POSITION,
     TEXTURE,
     NORMAL,
+    INDEX,
     BUFFER_SIZE
 };
 
